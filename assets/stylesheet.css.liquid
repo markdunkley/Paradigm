@@ -313,23 +313,31 @@ ul.product-social-buttons li * { float:none}
 .price strong input:hover { }
 
 .selector-wrapper {border-bottom:1px solid {{ settings.light_border }}; margin:0 0 21px 0; padding:0 0 10px 0;}
-.selector-wrapper:after {content:''; display:block; border-bottom:1px solid {{ settings.borderline_bottom }}; top:10px; position:relative;}
+
 .selector-wrapper:first-child { border-top:1px solid {{ settings.light_border }}; padding-top:20px; padding-bottom:6px }
 
-.radio-buttons strong { font-size:15px}
+/*.radio-buttons strong { font-size:15px}
 .radio-buttons ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
 .radio-buttons ul li:first-child { border-top:1px solid  {{ settings.light_border }}; padding-top:14px}
-.radio-buttons ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}; padding:5px 0 12px 0}
+.radio-buttons ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}; padding:5px 0 12px 0}*/
 
 #product-variants {  margin-bottom:27px; width:290px;}
 
 .selector-wrapper label  { font-size:11px; font-weight:bold; text-transform:uppercase;  margin:0 0 8px 0; display:block; color:{{ settings.text_color }}; width:215px}
-.radio-buttons { color:{{ settings.text_color }}; }
-.selector-wrapper select { position:relative; top:2px}
+.selector-wrapper select { position:relative; top:-4px }
+.selector-wrapper::after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0 ;}
 
-.selector-wrapper ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
+.variants-wrapper { width: 378px;}
+.variants-wrapper label { float:left; width: 222px;}
+.variants-wrapper select { float:right; }
+
+
+
+/*.selector-wrapper ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
 .selector-wrapper ul li:first-child { border-top:1px solid  {{ settings.light_border }}}
-.selector-wrapper ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}}
+.selector-wrapper ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}}*/
+
+
 
 /* =================== */
 /* = Indvidual pages = */
