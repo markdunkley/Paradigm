@@ -1,0 +1,19 @@
+{% if settings.enable_socialicons %}
+    <ul>
+       {% if settings.show_facebook %}
+      <li><a href="{{ settings.facebook_url }}">{{ 'icon-facebook.png' | asset_url | img_tag }}</a></li>
+        {% endif %}
+        
+       {% if settings.show_email %}
+      <li><a href="mailto:{{ settings.email_url}}">{{ 'icon-mail.png' | asset_url | img_tag }}</a></li>
+       {% endif %}
+       
+       {% if settings.show_twitter %}
+      <li><a href="{{ settings.twitter_url }}">{{ 'icon-twitter.png' | asset_url | img_tag }}</a></li>
+       {% endif %}
+       
+      {% if settings.show_rss %}
+      <li><a href="{{shop.url}}{{ blog.url }}.atom">{{ 'icon-rss.png' | asset_url | img_tag }}</a></li>
+      {% endif %}
+    </ul>
+    {% endif %}

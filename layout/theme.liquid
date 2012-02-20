@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	{% unless settings.meta_description == "" %}
+	<meta name="keywords" content="{{ settings.meta_keywords }}" >
+	{% endunless %}
+	{% unless settings.meta_keywords == "" %}
+	<meta name="description" content="{{ settings.meta_description }}" >
+	{% endunless %}
+
+	{% if template == "product" %}
+	<meta property="og:site_name" content="{{ shop.name }}" />
+	{% if template == 'product' %}
+	<meta property="og:image" content="{{ product.featured_image | product_img_url: 'compact' }}" />
+	{% endif %}
+	{% endif %}
+
+	<title>
+		{% if template == "index" %}
+		{% if settings.home_title_tag != "" %}
+		{{ settings.home_title_tag }}
+		{% else %}
+		{{ shop.name }} &mdash; {{ page_title }}
+		{% endif %}
+		{% else %}
+		{{ shop.name }} &mdash; {{ page_title }}
+		{% endif %}
+	</title>
+	{{ 'stylesheet.css' | asset_url | stylesheet_tag }}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<!--[if IE 7]>
+	{{ 'ie7.css' | asset_url | stylesheet_tag }}
+	<![endif]-->
+	{{ 'bxslider.js' | asset_url | script_tag }}
+	{{ 'fancybox.js' | asset_url | script_tag }}
+	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+	{{ 'paradigm.js' | asset_url | script_tag }}
+	{% if template contains 'customers' %}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+	{{ content_for_header }}
+
+	{% capture active_url %}{% if template == "index" %}/{% elsif template == "collection" %}/collections/{{ collection.handle }}{% elsif template == "product" %}{% if collection %}/collections/{{ collection.handle }}{% endif %}{% elsif template == "page" %}/pages/{{ page.handle }}{% elsif template == "blog" %}/blogs/{{ blog.handle }}{% elsif template == "cart" %}/cart{% elsif template == "search" %}/search{% endif %}{% endcapture %}
+
+</head>
+
+<body id="page-{{ template }}">
+
+
+	<div class="cornershadow-left">
+	</div><!-- .cornershadow-right -->
+
+	<div class="cornershadow-right">
+	</div><!-- .cornershadow-right -->
+
+	<div id="wrapper">
+		<div class="container">
+			
+			<div id="header" class="clearfix">
+				<div class="masthead clearfix">
+
+					<div class="logo">
+						{% if settings.custom_logo %}
+						<a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
+						{% else %}
+						<a href="/">{{ shop.name }}</a>
+						{% endif %}
+					</div>
+
+					<div class="vertical-navs clearfix">
+						
+						{% if shop.customer_accounts_enabled %}
+						
+						<ul class="cart">
+							<li>Cart &amp; Login</li>
+							{% if customer  %}
+							<li><a href="{{ shop.url }}/account">View account</a></li>
+							<li>{{ "Logout" | customer_logout_link }}</li>
+							{% else %}
+						    <li>{{ "Login" | customer_login_link }}</li>
+						  {% endif %}
+							<li><a href="/cart/"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items'}} in cart</a></li>
+							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Checkout</strong></a></li>
+						</ul>
+
+						{% else %}
+						
+						<ul class="cart">
+							<li>Cart</li>
+							<li><a href="/cart/"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items'}} in cart</a></li>
+							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Checkout</strong></a></li>
+						</ul>
+						
+						{% endif %}
+						
+						<ul>
+							<li>{{ linklists.[settings.linklist_header_one].title}}</li>
+							{% for link in linklists.[settings.linklist_header_one].links %}
+							<li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+							{% endfor %}
+						</ul>
+
+						<ul>
+							<li>{{ linklists.[settings.linklist_header_two].title}}</li>
+							{% for link in linklists.[settings.linklist_header_two].links %}
+							<li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+							{% endfor %}
+						</ul>
+
+						<ul>
+							<li>{{ linklists.[settings.linklist_header_three].title}}</li>
+							{% for link in linklists.[settings.linklist_header_three].links %}
+							<li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+							{% endfor %}
+						</ul>
+
+					</div><!-- .vertical-navs -->
+				</div><!-- .mashead -->
+
+				<ul class="main-nav clearfix">
+					{% for link in linklists.[settings.linklist_nav].links %}
+					{% capture child_list_handle %}{{ link.title | handleize }}{% endcapture %}
+
+					<li class="{% if link.url == active_url %} current{% endif %}{% if template == 'article' and link.url == blog.url %} current_page_item{% endif %} {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}dropdown{% endif %}">
+
+						<a 
+						href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+
+						{% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+						<div class="dropdown-ie">
+							<ul>
+								{% for l in linklists[child_list_handle].links %}
+								<li><a href="{{ l.url }}" ><span>{{ l.title }}</span></a></li>
+								{% endfor %}
+							</ul>
+						</div>
+
+						{% endif %}
+
+					</li>
+
+					{% endfor %}
+					<li class="search-nav">
+						<form action="/search" method="get">
+							<input type="submit"  class="search-button" name="search-button" onclick="this.parentNode.submit(); return false;" id="seek" /><input type="text"  name="q" id="q" value="Search..." size="34" id="result-q" /> 
+						</form>
+					</li>
+				</ul>
+
+			</div><!-- #header -->
+
+
+			<div class="content clearfix">
+
+				{{ content_for_layout }}
+
+			</div><!-- .content -->
+
+		</div><!-- #cont --> 
+
+
+
+		<div id="footer" class="clearfix">
+			<div class="footer-wrapper">
+
+				<div class="footer-details">
+					<div class="clearfix">
+
+
+
+						<ul class="footer-links">
+							<li>Copyright &copy; {{shop.name}} {{ 'now' | date: "%Y" }}</li>
+							<li>{% if settings.include_themeauthorlink %}
+								Design by <a href="http://www.splendidthemes.com">Splendid Themes</a></li> 
+								{% endif %}
+								{% if settings.include_shopifylink %}
+								<li>Built with <a href="y">Shopify</a></li>
+								{% endif %}
+
+
+								{% for link in linklists.footer.links %}
+								<li><a href="{{ link.url }}">{{ link.title }}</a></li>
+								{% endfor %}
+							</ul>
+
+							<p>{{ settings.store_address }}</p>
+
+						</div>
+					</div>
+
+
+
+					{% if settings.enable_creditcards %}
+
+					<ul class="creditcards">
+						{% if settings.show_visa %}
+						<li>{{ 'icon-cc-visa-sml.png' | asset_url | img_tag }}</li>
+						{% endif %}
+
+						{% if settings.show_paypal %}
+						<li>{{ 'icon-cc-paypal-sml.png' | asset_url | img_tag }}</li>
+						{% endif %}
+
+						{% if settings.show_discover %}
+						<li>{{ 'icon-cc-disc-sml.png' | asset_url | img_tag }}</li>
+						{% endif %}
+
+						{% if settings.show_master %}
+						<li>{{ 'icon-cc-master-sml.png' | asset_url | img_tag }}</li>
+						{% endif %}
+
+						{% if settings.show_amex %}
+						<li>{{ 'icon-cc-amex-sml.png' | asset_url | img_tag }}</li>
+						{% endif %}
+					</ul>
+					{% endif %}
+
+
+					{% if settings.show_socialmedia %}
+					<ul class="socialmedia">
+						{% if settings.show_facebook %}
+						<li><a href="{{ settings.facebook_url }}">{{ 'icon-facebook-small.png' | asset_url | img_tag }}</a></li>
+						{% endif %}
+						{% if settings.show_mail %}
+						<li><a href="mailto:{{ settings.mail_url }}">{{ 'icon-mail-small.png' | asset_url | img_tag }}</a></li>
+						{% endif %}
+						{% if settings.show_rss %}
+						<li><a href="{{ settings.rss_url }}">{{ 'icon-rss-small.png' | asset_url | img_tag }}</a></li>
+						{% endif %}
+						{% if settings.show_flickr %}
+						<li><a href="{{ settings.flickr_url }}">{{ 'icon-flickr-sml.png' | asset_url | img_tag }}</a></li>
+						{% endif %}
+						{% if settings.show_twitter %}
+						<li><a href="{{ settings.twitter_url }}">{{ 'icon-twitter-small.png' | asset_url | img_tag }}</a></li>
+						{% endif %}
+					</ul>
+					{% endif %}
+
+				</div><!-- .footer-wrapper -->
+			</div><!-- .footer -->
+		</div><!-- .wrapper -->
+
+	</body>
+	</html>

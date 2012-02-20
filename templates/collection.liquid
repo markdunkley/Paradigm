@@ -1,0 +1,55 @@
+{% for link in linklists.[settings.linklist_nav].links %}
+{% if link.object.handle == collection.handle %}
+{% capture show_sub_nav %}yes{% endcapture %}
+{% endif %}
+{% endfor %}
+	
+{% if show_sub_nav == 'yes' %}
+<ul class="subnav clearfix">
+
+	{% if current_tags %}
+   <li><a href="{{ collection.url }}">All</a></li>
+  {% else %}
+   <li class="active"><a href="{{ collection.url }}">All</a></li>
+  {% endif %}
+  
+{% for tag in collection.all_tags %}
+
+    {% if current_tags contains tag %}
+    <li class="active">{{ tag | link_to_tag: tag }}</li>
+    {% else %}
+
+    <li>{{ tag | link_to_tag: tag }}</li>
+    {% endif %}
+
+  {% endfor %}
+
+</ul>
+{% endif %}
+
+{% paginate collection.products by settings.how_many_products %}
+{% if collection.products.size == 0 %}
+<strong>No products found in this collection.</strong>
+{% else %}
+
+
+{% unless collection.description == blank %}
+<div class="collection-description">
+{{ collection.description }}	
+</div><!-- .collection-description -->
+
+{% endunless %}
+
+<table class="products">
+	{% tablerow product in collection.products cols:4  %}
+	<a href="{{ product.url | within: collection }}"><span><span class="vertical-center" style="width:185px"><b class="ie8-fix"><img src="{{ product.images.first | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" /></b></span></span>{% if product.compare_at_price_max > product.price_max %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+	{% endtablerow %}
+</table>
+
+{% if paginate.pages > 1 %}
+<div id="paginate">
+  {{ paginate | default_pagination }}
+</div>{% endif %}{% endif %}
+{% endpaginate %}
+
+

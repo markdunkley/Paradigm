@@ -1,0 +1,139 @@
+<!--  single image  -->
+{% if settings.slideshow_limit == 'one' %}
+<div class="slideshow">
+	<div id="home-slider">
+		<ul>
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+		</ul>
+	</div><!-- #slideshow -->
+</div><!-- .slideshow-shadow -->
+{% endif %}    
+
+{% if settings.slideshow_limit != empty and settings.slideshow_limit != 'one' %}
+<div class="slideshow">
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+		$('#home-slider').bxCarousel({
+			display_num: 1,       
+			move: 1,             
+			speed: 500,          
+			margin:0,            
+			auto: true,         
+			auto_interval: {{settings.slideshow_speed}}000, 
+			auto_dir: 'next',    
+			auto_hover: false,   
+			next_text: 'next',   
+			next_image: '',       
+			prev_text: 'prev',    
+			prev_image: '',       
+			controls: true        
+		});
+	});
+
+	</script>
+
+
+	<div id="home-slider">
+		<ul>
+			{% case settings.slideshow_limit %}
+
+			{% when 'one' %}
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+
+			{% when 'two' %}
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide2_link }}"><img src="{{ 'slideshow2.jpg' | asset_url }}"></a></li>
+                                     
+                                     
+			{% when 'three' %}             
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide2_link }}"><img src="{{ 'slideshow2.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide3_link }}"><img src="{{ 'slideshow3.jpg' | asset_url }}"></a></li>
+                                     
+                                     
+			{% when 'four' %}              
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide2_link }}"><img src="{{ 'slideshow2.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide3_link }}"><img src="{{ 'slideshow3.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide4_link }}"><img src="{{ 'slideshow4.jpg' | asset_url }}"></a></li>
+                                     
+                                     
+			{% when 'five' %}              
+			<li><a href="{{ settings.slide1_link }}"><img src="{{ 'slideshow1.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide2_link }}"><img src="{{ 'slideshow2.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide3_link }}"><img src="{{ 'slideshow3.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide4_link }}"><img src="{{ 'slideshow4.jpg' | asset_url }}"></a></li>
+			<li><a href="{{ settings.slide5_link }}"><img src="{{ 'slideshow5.jpg' | asset_url }}"></a></li>
+			{% endcase %}
+		</ul>
+	</div><!-- #slideshow-wrapper -->
+</div><!-- .slideshow -->
+{% endif %}
+
+
+{% if settings.frontpage_3images %}
+<ul class="three-pages clearfix">
+	<li><a href="{{ settings.frontpage_3images_one_url }}"><img src="{{ 'frontpage_3images_one.jpg' | asset_url }}"/></a></li>
+	<li><a href="{{ settings.frontpage_3images_two_url }}"><img src="{{ 'frontpage_3images_two.jpg' | asset_url }}"/></a></li>
+	<li><a href="{{ settings.frontpage_3images_three_url }}"><img src="{{ 'frontpage_3images_three.jpg' | asset_url }}"/></a></li>
+</ul>
+{% endif %}
+
+{% if settings.frontpage_3pages %}
+<ul class="three-pages clearfix">
+	<li>{{ pages[settings.frontpage_3pages_one].content}}</li>
+	<li>{{ pages[settings.frontpage_3pages_two].content}}</li>
+	<li>{{ pages[settings.frontpage_3pages_three].content}}</li>
+</ul>
+{% endif %}
+
+
+<div id="content" class="clearfix"> 
+
+	{% if settings.frontpage_collection != empty %}
+	<table class="products">
+		{% tablerow product in collections[settings.frontpage_collection].products cols:4  %}
+		<a href="{{ product.url | within: collections.[settings.frontpage_collection] }}"><span><span class="vertical-center"><img src="{{ product.images.first | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" /></span></span>{% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+
+		{% endtablerow %}
+	</table>
+	{% endif %}
+
+
+	{% if linklists[settings.linklist_category] != empty %}
+	<table class=" categories">
+		{% tablerow link in linklists[settings.linklist_category].links cols:4 %}
+		{% if link.url contains "/collections/" %}
+		<div class="collection">
+			<a href="{{ link.url }}"><span><img src="{{ collections[link.object.handle].products.first.featured_image | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" /></span><strong>{{ link.object.title }}</strong></a> 
+		</div>
+		{% endif %}
+		{% endtablerow %}
+	</table>
+	{% endif %}
+
+
+	{% if settings.frontpage_right and settings.frontpage_left != empty %}
+	<ul class="two-pages clearfix">
+		{% if settings.frontpage_left != empty %}
+		<li>
+			{{ pages[settings.frontpage_left].content}}
+		</li>
+		{% endif %}
+
+		{% if settings.frontpage_right != empty %}
+		<li>
+			{{ pages[settings.frontpage_right].content}}
+		</li>
+		{% endif %}
+	</ul>
+	{% endif %}
+
+</div><!-- #content -->
+
+
+
+
+
+
+

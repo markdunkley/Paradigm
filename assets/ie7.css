@@ -1,0 +1,13 @@
+.clearfix { zoom: 1 }
+img { -ms-interpolation-mode: bicubic; }
+#header .vertical-navs ul.cart .checkout a { color:#fff!important;}
+
+#header .vertical-navs ul.cart .checkout.inactive a {color:#444!important; }
+
+#header ul.main-nav>li>a { z-index:999}
+
+#header ul.main-nav .dropdown-ie {  top:4px;} 
+
+#header ul.main-nav>li>a { padding:0 0 1px 0; }
+
+#header ul.main-nav li.dropdown>a { padding-right:0px}

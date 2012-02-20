@@ -1,0 +1,127 @@
+<div class="blog">
+	<div class="blog-header clearfix">
+		<h1><a href="{{blog.url}}">{{ blog.title }}</a></h1>
+	</div>
+</div><!-- .blog -->
+
+
+{% if blog.all_tags != blank %}
+<ul class="subnav clearfix">
+	{% if current_tags %}
+	<li><a href="{{ blog.url }}">All Posts</a></li>
+	{% else %}
+	<li class="active"><a href="{{ blog.url }}">All Posts</a></li>
+	{% endif %}
+
+	{% for tag in blog.all_tags %}
+	{% if current_tags contains tag %}
+	<li class="active">{{ tag | link_to_tag: tag }}</li>
+	{% else %}
+	<li>{{ tag | link_to_tag: tag }}</li>
+	{% endif %}
+
+	{% endfor %}
+</ul>
+{% endif %}
+
+
+<div class="post clearfix">
+
+<div class="post-meta col-4">
+	<h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+	<p class="meta"><em>{{ article.created_at | date: "%d.%m.%Y. " }}</em> <br/>{% if blog.comments_enabled? %}
+		<a href="#comments">{{ article.comments_count }} {{  article.comments_count | pluralize: 'comment', 'comments' }}</a>{% endif %}</p>
+
+	</div>
+
+	<div class="col-6 last post-details">
+		<div class="post-content">
+			{{ article.content }}
+		
+		</div><!-- .post-content  -->
+	</div>
+	
+	</div>
+	<!-- post -->
+
+
+
+<div class="post clearfix">
+
+
+            {% if blog.comments_enabled? %}
+            <div id="comments">
+              <h2>Comments</h2>
+
+
+              <ul>
+              {% for comment in article.comments %}
+                <li class="clearfix">
+	
+	                <div class="comment-details col-4">
+                		  <strong>Posted by {{ comment.author }}</strong>
+											<em>{{ comment.created_at | date: "%d.%m.%y." }}</em>
+                    </div>
+                  <div class="comment col-8 last">
+                  {{ comment.content }}
+                  </div>
+
+              	</li>
+              {% endfor %}
+              </ul>
+
+              <!-- Comment Form -->
+              {% form article %}
+
+<div class="comment-form-border clearfix">
+                <h3>Leave a comment</h3>
+	</div><!-- .comment-form-header-wrapper clearfix -->
+
+                <!-- Check if a comment has been submitted in the last request, and if yes display an appropriate message -->
+                {% if form.posted_successfully? %}
+                  {% if blog.moderated? %}
+                    <div class="notice">
+                      Successfully posted your comment.<br />
+                      It will have to be approved by the blog owner first before showing up.
+                    </div>
+                  {% else %}
+                    <div class="success">Successfully posted your comment.</div>
+                  {% endif %}
+                {% endif %}
+
+                {% if form.errors %}
+                  <div class="notice">Not all the fields have been filled out correctly!</div>
+                {% endif %}
+
+                <dl>
+                  <dt class="{% if form.errors contains 'author' %}error{% endif %}"><label for="comment_author">Your name</label></dt>
+                  <dd><input type="text" id="comment_author" name="comment[author]" size="34" value="{{form.author}}" class="{% if form.errors contains 'author' %}input-error{% endif %}" /></dd>
+
+                  <dt class="{% if form.errors contains 'email' %}error{% endif %}"><label for="comment_email">Your email</label></dt>
+                  <dd><input type="text" id="comment_email" name="comment[email]" size="34" value="{{form.email}}" class="{% if form.errors contains 'email' %}input-error{% endif %}" /></dd>
+
+                  <dt><label for="comment_body">Your comment</label></dt>
+                  <dd><textarea id="comment_body" name="comment[body]" cols="45" rows="7" class="{% if form.errors contains 'body' %}input-error{% endif %}">{{form.body}}</textarea></dd>
+                </dl>
+
+                {% if blog.moderated? %}
+                  <p class="hint">comments have to be approved before showing up</p>
+                {% endif %}    
+
+                <input class="standard-button" type="submit" value="Post comment" />
+              {% endform %}
+            </div>
+            {% endif %}
+            
+              <a href="/blogs/{{ blog.handle }}">&lsaquo; Go back to the blog</a>
+
+          
+     
+     </div><!-- .post -->
+
+
+
+
+
+
+
