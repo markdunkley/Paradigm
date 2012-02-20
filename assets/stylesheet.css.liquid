@@ -54,22 +54,17 @@ ul, ol { margin:0px 0 20px 20px;}
 
 a.standard-button , input.standard-button, input[type="submit"]  { padding:10px; color:#fff; text-shadow:1px 1px #074c62;
     
-    background: {{settings.button_color}}; /* old browsers */
-
-	background: -moz-linear-gradient(top, {{ settings.button_color_top }} 0%, {{settings.button_color}} 100%); /* firefox */
-
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color_top }}), color-stop(100%,{{settings.button_color}})); 
-	
-	 border:0; font-size:19px; letter-spacing:-1px;  border:0;border-bottom:1px solid {{ settings.button_border }}; -moz-border-radius:8px; -webkit-border-radius:8px; padding:8px 10px; font-weight:bold}
+  background: {{settings.button_color}};
+	background: -moz-linear-gradient(top, {{ settings.button_color_top }} 0%, {{settings.button_color}} 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color_top }}), color-stop(100%,{{settings.button_color}})); border:0; font-size:19px; letter-spacing:-1px;  border:0;border-bottom:1px solid {{ settings.button_border }}; -moz-border-radius:8px; -webkit-border-radius:8px; padding:8px 10px; font-weight:bold}
 
 a.standard-button:hover , input.standard-button:hover, input[type="submit"]:hover  { 
 	background: {{settings.button_color_top }}; /* old browsers */
-
-	background: -moz-linear-gradient(top, {{ settings.button_color }} 0%, {{settings.button_color_top}} 100%); /* firefox */
-
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color }}), color-stop(100%,{{settings.button_color_top}})); /* webkit */
-
+	background: -moz-linear-gradient(top, {{ settings.button_color }} 0%, {{settings.button_color_top}} 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color }}), color-stop(100%,{{settings.button_color_top}}));
 	 cursor:pointer}
+
+[disabled] { opacity:0.5; cursor: default;}
 
 .cornershadow-right { background:transparent url('vig-right.png') no-repeat; position:fixed; right:0; z-index:0; width:533px; height:611px;  }
 .cornershadow-left { background:transparent url('vig-left.png') no-repeat; position:fixed; left:0; z-index:0; width:533px; height:611px;  }
