@@ -1,6 +1,3 @@
-Nov 17
-- Fixed meta description mixup
-
 October 18
 - Wrapped all customer account templates in div #customers-section and prepended ""#customers-section"" to some CSS selectors that were causing issues
 - Changed blog pagination from 2 to 8
