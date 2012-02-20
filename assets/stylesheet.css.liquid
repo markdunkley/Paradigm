@@ -64,7 +64,8 @@ a.standard-button:hover , input.standard-button:hover, input[type="submit"]:hove
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color }}), color-stop(100%,{{settings.button_color_top}}));
 	 cursor:pointer}
 
-[disabled] { opacity:0.5; cursor: default;}
+input:disabled { opacity:0.5; cursor: default!important; background: {{settings.button_color_top }}!important;}
+input:disabled:hover { background: {{settings.button_color_top }}!important;}
 
 .cornershadow-right { background:transparent url('vig-right.png') no-repeat; position:fixed; right:0; z-index:0; width:533px; height:611px;  }
 .cornershadow-left { background:transparent url('vig-left.png') no-repeat; position:fixed; left:0; z-index:0; width:533px; height:611px;  }
@@ -295,13 +296,13 @@ ul.product-social-buttons { margin:0; padding:0 0 10px 0; display:block;  }
 ul.product-social-buttons li {  float:left; margin-right:5px; list-style-type:none; }
 ul.product-social-buttons li * { float:none}
 
-.show-price { display:block; margin-bottom:10px}
-.show-price .sale-icon { float:left; margin-right:5px; }
-.show-price strike { color: {{ settings.main_text_color }}; font-size:16px; font-style:italic;}
+.price { display:block; margin-bottom:10px}
+.price .sale-icon { float:left; margin-right:5px; }
+.price strike { color: {{ settings.main_text_color }}; font-size:16px; font-style:italic;}
 
 .more-of-this {  margin-bottom:20px}
 
-.price em { font-size:19px; font-weight:bold; letter-spacing:-1px; font-style:normal; color:{{ settings.active_border }}; margin-bottom:10px;}
+.price  { font-size:19px; font-weight:bold; letter-spacing:-1px; font-style:normal; color:{{ settings.active_border }}; margin-bottom:10px;}
 
 .price strong input {  }
 
