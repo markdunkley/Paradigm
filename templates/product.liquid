@@ -64,7 +64,6 @@
       <ul class="product-social-buttons">
         <li><a href="http://twitter.com/share" class="twitter-share-button" data-text="Check out {{ product.handle }}" data-count="none">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
         <li><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="{{ shop.url }}/products/{{ product.handle }}" layout="button_count" show_faces="true" width="150"></fb:like></li>
-
       </ul>
       {% endif %}
 
@@ -75,17 +74,22 @@
 			{{ product.description }}   
 		</div><!-- .description -->
 
-
     {% if product.available %}
       <form action="/cart/add" method="post" class="variants" id="product-actions">
         <div class="options clearfix">  
 
           <div class="variants-wrapper clearfix {% if product.variants.size == 1 %}visuallyhidden{% endif %}"> 
-            <select id="product-select" name="id">
-              {% for variant in product.variants %}
-              <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
-              {% endfor %}
-            </select>
+            
+          {% if product.variants.size > 1 and product.options.size == 1  %} 
+          <label for="{{ product.options }}">{{ product.options }}</label>
+          {% endif %}
+          
+          <select id="product-select" name="id">
+            {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
+            
+            {% endfor %}
+           </select>
           </div>            
             
           <div id="purchase">
@@ -103,10 +107,10 @@
         </div>
       </div>      
     {% endif %}
-  </div><!-- /#product-header -->
+  </div><!-- #product-header -->
         
 
-</div><!-- /#product-information -->
+</div><!-- /product-information -->
 
 
 		</div><!-- .product-details-->

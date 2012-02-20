@@ -7,6 +7,7 @@ img { border:0;}
 /* = General CSS = */
 /* =============== */
 .clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.visuallyhidden { display:none;}
 
 a { text-decoration:none; color:{{ settings.link_color }};}
 a:hover { text-decoration:underline; color:{{ settings.link_hover_color}};}
@@ -310,7 +311,7 @@ ul.product-social-buttons li * { float:none}
 
 .selector-wrapper {border-bottom:1px solid {{ settings.light_border }}; margin:0 0 21px 0; padding:0 0 10px 0;}
 
-.selector-wrapper:first-child { border-top:1px solid {{ settings.light_border }}; padding-top:20px; padding-bottom:6px }
+.variants-wrapper { border-top:1px solid {{ settings.light_border }}; padding-top:20px; padding-bottom:6px }
 
 /*.radio-buttons strong { font-size:15px}
 .radio-buttons ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
@@ -323,11 +324,9 @@ ul.product-social-buttons li * { float:none}
 .selector-wrapper select { position:relative; top:-4px }
 .selector-wrapper::after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0 ;}
 
-.variants-wrapper { width: 378px;}
-.variants-wrapper label { float:left; width: 222px;}
-.variants-wrapper select { float:right; }
-
-
+.variants-wrapper { width: 420px;}
+.variants-wrapper label { float:left; width: 200px;}
+.variants-wrapper select { float:left; }
 
 /*.selector-wrapper ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
 .selector-wrapper ul li:first-child { border-top:1px solid  {{ settings.light_border }}}
