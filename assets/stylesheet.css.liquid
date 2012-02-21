@@ -7,6 +7,7 @@ img { border:0;}
 /* = General CSS = */
 /* =============== */
 .clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.visuallyhidden { display:none;}
 
 a { text-decoration:none; color:{{ settings.link_color }};}
 a:hover { text-decoration:underline; color:{{ settings.link_hover_color}};}
@@ -54,22 +55,18 @@ ul, ol { margin:0px 0 20px 20px;}
 
 a.standard-button , input.standard-button, input[type="submit"]  { padding:10px; color:#fff; text-shadow:1px 1px #074c62;
     
-    background: {{settings.button_color}}; /* old browsers */
-
-	background: -moz-linear-gradient(top, {{ settings.button_color_top }} 0%, {{settings.button_color}} 100%); /* firefox */
-
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color_top }}), color-stop(100%,{{settings.button_color}})); 
-	
-	 border:0; font-size:19px; letter-spacing:-1px;  border:0;border-bottom:1px solid {{ settings.button_border }}; -moz-border-radius:8px; -webkit-border-radius:8px; padding:8px 10px; font-weight:bold}
+  background: {{settings.button_color}};
+	background: -moz-linear-gradient(top, {{ settings.button_color_top }} 0%, {{settings.button_color}} 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color_top }}), color-stop(100%,{{settings.button_color}})); border:0; font-size:19px; letter-spacing:-1px;  border:0;border-bottom:1px solid {{ settings.button_border }}; -moz-border-radius:8px; -webkit-border-radius:8px; padding:8px 10px; font-weight:bold}
 
 a.standard-button:hover , input.standard-button:hover, input[type="submit"]:hover  { 
 	background: {{settings.button_color_top }}; /* old browsers */
-
-	background: -moz-linear-gradient(top, {{ settings.button_color }} 0%, {{settings.button_color_top}} 100%); /* firefox */
-
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color }}), color-stop(100%,{{settings.button_color_top}})); /* webkit */
-
+	background: -moz-linear-gradient(top, {{ settings.button_color }} 0%, {{settings.button_color_top}} 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{{ settings.button_color }}), color-stop(100%,{{settings.button_color_top}}));
 	 cursor:pointer}
+
+input:disabled { opacity:0.5; cursor: default!important; background: {{settings.button_color_top }}!important;}
+input:disabled:hover { background: {{settings.button_color_top }}!important;}
 
 .cornershadow-right { background:transparent url('vig-right.png') no-repeat; position:fixed; right:0; z-index:0; width:533px; height:611px;  }
 .cornershadow-left { background:transparent url('vig-left.png') no-repeat; position:fixed; left:0; z-index:0; width:533px; height:611px;  }
@@ -300,36 +297,47 @@ ul.product-social-buttons { margin:0; padding:0 0 10px 0; display:block;  }
 ul.product-social-buttons li {  float:left; margin-right:5px; list-style-type:none; }
 ul.product-social-buttons li * { float:none}
 
-.show-price { display:block; margin-bottom:10px}
-.show-price .sale-icon { float:left; margin-right:5px; }
-.show-price strike { color: {{ settings.main_text_color }}; font-size:16px; font-style:italic;}
+.price { display:block; margin-bottom:10px}
+.price .sale-icon { float:left; margin-right:5px; }
+.price strike { color: {{ settings.main_text_color }}; font-size:16px; font-style:italic;}
 
 .more-of-this {  margin-bottom:20px}
 
-.price em { font-size:19px; font-weight:bold; letter-spacing:-1px; font-style:normal; color:{{ settings.active_border }}; margin-bottom:10px;}
+.price  { font-size:19px; font-weight:bold; letter-spacing:-1px; font-style:normal; color:{{ settings.active_border }}; margin-bottom:10px;}
 
 .price strong input {  }
 
 .price strong input:hover { }
 
 .selector-wrapper {border-bottom:1px solid {{ settings.light_border }}; margin:0 0 21px 0; padding:0 0 10px 0;}
-.selector-wrapper:after {content:''; display:block; border-bottom:1px solid {{ settings.borderline_bottom }}; top:10px; position:relative;}
-.selector-wrapper:first-child { border-top:1px solid {{ settings.light_border }}; padding-top:20px; padding-bottom:6px }
 
-.radio-buttons strong { font-size:15px}
+.variants-wrapper { border-top:1px solid {{ settings.light_border }}; padding-top:20px; padding-bottom:6px }
+
+/*.radio-buttons strong { font-size:15px}
 .radio-buttons ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
 .radio-buttons ul li:first-child { border-top:1px solid  {{ settings.light_border }}; padding-top:14px}
-.radio-buttons ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}; padding:5px 0 12px 0}
+.radio-buttons ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}; padding:5px 0 12px 0}*/
 
 #product-variants {  margin-bottom:27px; width:290px;}
 
 .selector-wrapper label  { font-size:11px; font-weight:bold; text-transform:uppercase;  margin:0 0 8px 0; display:block; color:{{ settings.text_color }}; width:215px}
+<<<<<<< HEAD
 .radio-buttons { color:{{ settings.text_color }}; float:none; display:inline }
 .selector-wrapper select { position:relative; top:2px}
+=======
+.selector-wrapper select { position:relative; top:-4px }
+.selector-wrapper::after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0 ;}
+>>>>>>> 21cfbd5b4d0ccdca22817a8d9c8a8a40605a150d
 
-.selector-wrapper ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
+.variants-wrapper { width: 420px;}
+.variants-wrapper label { float:left; width: 200px;}
+.variants-wrapper select { float:left; }
+
+/*.selector-wrapper ul { list-style:none; margin:12px 0 0 0; padding:0 0 0 7px;}
 .selector-wrapper ul li:first-child { border-top:1px solid  {{ settings.light_border }}}
-.selector-wrapper ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}}
+.selector-wrapper ul li { margin-bottom:10px; border-bottom:1px solid  {{ settings.light_border }}}*/
+
+
 
 /* =================== */
 /* = Indvidual pages = */
@@ -474,7 +482,7 @@ ul.product-social-buttons li * { float:none}
 #customer_orders table { width: 100%; }
 
 #customers-section th { background-color: #FAFAFA; border-bottom: 1px solid #CCCCCC; color: #222222; font-weight: bold; height: 25px; line-height: 25px; padding: 2px 5px; text-align: left; vertical-align: middle; }
-#customers-section td { border-bottom: 1px solid #EEEEEE; line-height: 22px; padding: 5px; vertical-align: middle; }
+#customers-section td { line-height: 22px; padding: 5px; vertical-align: middle; }
 
 #customers-section  button, input, select, textarea { margin: 0; }
 #customers-section  label { color: #999999; display: block; float: left; font-weight: 400; height: 32px; line-height: 32px; margin: 0 20px 0 0; padding: 0;  width: 125px; }
