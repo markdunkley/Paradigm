@@ -31,6 +31,7 @@
 	{% endif %}
 
 	{% endfor %}
+	
 </ul>
 
 {% endif %}
@@ -55,7 +56,6 @@
 
 	<div class="product-details ">
 		
-		
     <div class="product-title clearfix">
 
       <h1>{{ product.title | escape }}</h1>
@@ -69,7 +69,6 @@
 
     </div><!-- .product-title -->
 
-
 		<div class="description">
 			{{ product.description }}   
 		</div><!-- .description -->
@@ -78,7 +77,7 @@
       <form action="/cart/add" method="post" class="variants" id="product-actions">
         <div class="options clearfix">  
 
-          <div class="variants-wrapper clearfix {% if product.variants.size == 1 %}visuallyhidden{% endif %}"> 
+          <div class="variants-wrapper clearfix {% if product.variants.size == 1 %}visuallyhidden{% endif %}">
             
           {% if product.variants.size > 1 and product.options.size == 1  %} 
           <label for="{{ product.options }}">{{ product.options }}</label>
@@ -112,9 +111,7 @@
 
 </div><!-- /product-information -->
 
-
-		</div><!-- .product-details-->
-	</div><!-- .product -->
+</div><!-- .product -->
 
 
 		
