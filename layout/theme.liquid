@@ -33,6 +33,9 @@
 		{{ shop.name }} &mdash; {{ page_title }}
 		{% endif %}
 	</title>
+
+	<link rel="canonical" href="{{ canonical_url }}" />
+
 	{{ 'stylesheet.css' | asset_url | stylesheet_tag }}
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<!--[if IE 7]>
