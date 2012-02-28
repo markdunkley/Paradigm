@@ -44,10 +44,10 @@
 			{% for image in product.images %}
 			{% if forloop.first %}
 			<li>
-				<a href="{{ image | product_img_url: 'grande' }}" rel="fancy" class="fancy_image" ><img src="{{ image | product_img_url: 'medium' }}"   /></a>
+				<a href="{{ image | product_img_url: 'grande' }}" rel="fancy" class="fancy_image" ><img src="{{ image | product_img_url: 'medium' }}"  /></a>
 			</li>
 			{% else %}
-			<li><a href="{{ image | product_img_url: 'grande' }}" rel="fancy" class="fancy_image" ><img  src="{{ image | product_img_url: 'compact' }}" alt="{{ product.title | escape }}" width="110px" /></a></li>
+			<li><a href="{{ image | product_img_url: 'grande' }}" rel="fancy" class="fancy_image" ><img  src="{{ image | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" width="110px" /></a></li>
 			{% endif %}
 			{% endfor %}
 		</ul>
@@ -102,7 +102,7 @@
     {% else %}
       <div id="product-actions" class="sold-out">
         <div id="purchase">
-          <p class="price">Sold out.</p>      
+          <p class="price">Sold out</p>      
         </div>
       </div>      
     {% endif %}
@@ -114,7 +114,6 @@
 </div><!-- .product -->
 
 
-		
 		
 		{% if collection.handle != blank %}
 		
