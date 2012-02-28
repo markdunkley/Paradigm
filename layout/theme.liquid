@@ -93,7 +93,7 @@
 						    <li>{{ "Login" | customer_login_link }}</li>
 						  {% endif %}
 							<li><a href="/cart/"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items'}} in cart</a></li>
-							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Checkout</strong></a></li>
+							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Check out</strong></a></li>
 						</ul>
 
 						{% else %}
@@ -101,7 +101,7 @@
 						<ul class="cart">
 							<li>Cart</li>
 							<li><a href="/cart/"> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items'}} in cart</a></li>
-							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Checkout</strong></a></li>
+							<li class="checkout {% if cart.item_count > 0 %}active{% else %}inactive{% endif %}"><a href="/cart/"><strong>Check out</strong></a></li>
 						</ul>
 						
 						{% endif %}
