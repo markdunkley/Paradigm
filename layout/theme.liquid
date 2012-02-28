@@ -15,10 +15,11 @@
 	  <meta name="description" content="{{ shop.description | strip_html | strip_newlines | truncate: maxmeta | escape}}" />
 	{% endif %}
 
-	{% if template == "product" %}
-	<meta property="og:site_name" content="{{ shop.name }}" />
-	{% if template == 'product' %}
+	{% if template contains 'product' %}
 	<meta property="og:image" content="{{ product.featured_image | product_img_url: 'compact' }}" />
+	{% else %}
+	{% if settings.custom_logo == "logo.png" %}
+	<meta property="og:image" content="{{ 'logo.png' | asset_url }}" />
 	{% endif %}
 	{% endif %}
 
