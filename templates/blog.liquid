@@ -48,8 +48,13 @@
 	<div class="col-6 last post-details">
 		<div class="read-icon"><a href="{{ article.url }}"><img src="{{ 'icon-readmore.png' | asset_url }}"/></a></div>	
 		<div class="post-content">
-			{{ article.content }}
-			<a  href="{{ article.url }}">Continue Reading &rsaquo;</a>
+		{% if article.excerpt.size > 0 %}
+		  {{ article.excerpt }}
+		  <p><a  href="{{ article.url }}">Continue Reading &rsaquo;</a></p>
+		{% else %}
+		  {{ article.content }}
+		{% endif %}
+		
 		</div><!-- .post-content  -->
 	</div>
 	
