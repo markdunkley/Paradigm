@@ -153,12 +153,18 @@
 					</li>
 
 					{% endfor %}
-					<li class="search-nav">
-						<form action="/search" method="get">
-							<input type="submit"  class="search-button" name="search-button" onclick="this.parentNode.submit(); return false;" id="seek" /><input type="text"  name="q" id="q" value="Search..." size="34" id="result-q" /> 
-						</form>
-					</li>
+
 				</ul>
+
+				{% if settings.no_search %}
+
+				<div class="search-nav">
+					<form action="/search" method="get">
+						<input type="submit"  class="search-button" name="search-button" onclick="this.parentNode.submit(); return false;" id="seek" /><input type="text"  name="q" id="q" value="Search..." size="34" id="result-q" /> 
+					</form>
+				</div>
+
+				{% endif %}
 
 			</div><!-- #header -->
 
