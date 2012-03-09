@@ -91,12 +91,7 @@
 <div id="content" class="clearfix"> 
 
 	{% if collections[settings.frontpage_collection].handle != empty %}
-	<table class="products">
-		{% tablerow product in collections[settings.frontpage_collection].products cols:4  %}
-		<a href="{{ product.url | within: collections.[settings.frontpage_collection] }}"><span><span class="vertical-center"><img src="{{ product.images.first | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" /></span></span>{% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
-
-		{% endtablerow %}
-	</table>
+	{% include 'product-grid' %}
 	{% endif %}
 
 

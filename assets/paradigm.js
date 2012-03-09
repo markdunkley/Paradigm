@@ -1,4 +1,4 @@
-	$(document).ready(function() { 
+$(document).ready(function() { 
 		 
 	$("a.fancy_image").fancybox(); 
 
@@ -48,8 +48,7 @@ $(window).load(function() {
 			}
 		});
 		
-		$(".products td span").height(tallestPro);
-		$(".products td span .vertical-center").height(tallestPro);
+		$(".products td .vertical-center").height(tallestPro);
 
 	}
 
@@ -64,3 +63,4 @@ $(window).load(function() {
 		$(".categories td span").height(tallestCat);	
 	}
 });
+

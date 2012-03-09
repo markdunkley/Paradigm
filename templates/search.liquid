@@ -29,7 +29,18 @@
 
 		{% if item.featured_image %}
 
-		<a href="{{ item.url | within: collection }}"><span><span class="vertical-center"><img src="{{ item.images.first | product_img_url: 'medium' }}" alt="{{ item.title | escape }}" /></span></span>{% if item.compare_at_price_max > item.price %}<em>sale</em>{% endif %}<strong>{{ item.title }}</strong><small>{{ item.price  | money }}</small></a>
+		<div class="product">
+			<a href="{{ item.url | within: collections.[settings.frontpage_collection] }}">
+
+				<span class="vertical-center">
+					<img src="{{ item.images.first | product_img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+				</span>
+
+				<span class="product-description clearfix">
+					<strong>{{ item.title }}</strong>
+				</span>
+			</a>
+		</div>
 
 
 		{% else %}

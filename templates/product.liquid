@@ -113,7 +113,6 @@
 
 </div><!-- .product -->
 
-
 		
 		{% if collection.handle != blank %}
 		
@@ -135,7 +134,17 @@
           {% unless product.handle == current_product %}
           {% if forloop.last and forloop.length > 4 %}
           <td>
-            <a href="{{ product.url | within: collection }}"><span><img src="{{ product.images.first | product_img_url: 'compact' }}"  alt="{{ product.title | escape }}" /></span>{% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+            <div class="product">
+            <a href="{{ product.url | within: collection }}">
+              <span class="vertical-center">
+                <img src="{{ product.images.first | product_img_url: 'compact' }}" alt="{{ product.title | escape }}" />
+              </span>
+
+              <span class="product-description clearfix">
+
+              {% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+            </span>
+                </div>
           </td>
           {% endif %}
           {% endunless %}
@@ -143,7 +152,17 @@
           {% else %}
 
           <td>
-            <a href="{{ product.url | within: collection }}"><span><span class="vertical-center"><img src="{{ product.images.first | product_img_url: 'compact' }}"  alt="{{ product.title | escape }}" /></span></span>{% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+            <div class="product">
+            <a href="{{ product.url | within: collection }}">
+              <span class="vertical-center">
+                <img src="{{ product.images.first | product_img_url: 'compact' }}" alt="{{ product.title | escape }}" />
+              </span>
+
+              <span class="product-description clearfix">
+
+              {% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
+            </span>
+                </div>
           </td>
 
           {% endif %}
