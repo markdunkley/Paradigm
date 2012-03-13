@@ -17,7 +17,24 @@ function remove_item(id) {
 {% if cart.item_count == 0 %}
 <p><strong>Your shopping basket is empty.</strong> Perhaps a featured item below is of interest...</p>
 
-{% include 'product-grid' with 'frontpage' %}
+<table class="products">
+	{% tablerow product in collections[settings.frontpage_collection].products cols:4  %}
+	<div class="product">
+
+	<a href="{{ product.url | within: collection }}">
+
+		<span class="vertical-center">
+			<img src="{{ product.images.first | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" />
+		</span>
+
+		<span class="product-description clearfix">
+
+			{% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small>
+		</span>
+		</a>
+		</div>
+	{% endtablerow %}
+</table>
 
 {% else %}
 

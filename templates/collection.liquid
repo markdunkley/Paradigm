@@ -5,6 +5,7 @@
 {% endfor %}
 	
 {% if show_sub_nav == 'yes' %}
+
 <ul class="subnav clearfix">
 
 	{% if current_tags %}
@@ -25,6 +26,7 @@
   {% endfor %}
 
 </ul>
+
 {% endif %}
 
 {% paginate collection.products by settings.how_many_products %}
@@ -40,7 +42,24 @@
 
 {% endunless %}
 
-{% include 'product-grid' with collection.handle %}
+<table class="products">
+  {% tablerow product in collection.products cols:4  %}
+  <div class="product">
+
+  <a href="{{ product.url | within: collection }}">
+
+    <span class="vertical-center">
+      <img src="{{ product.images.first | product_img_url: 'medium' }}" alt="{{ product.title | escape }}" />
+    </span>
+
+    <span class="product-description clearfix">
+
+      {% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small>
+    </span>
+    </a>
+    </div>
+  {% endtablerow %}
+</table>
 
 {% if paginate.pages > 1 %}
 <div id="paginate">
