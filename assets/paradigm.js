@@ -33,34 +33,3 @@ $(document).ready(function() {
 }); 
 
 
-$(window).load(function() {
-
-	equalHeightProducts();
-	equalHeightCat();
-
-	function equalHeightProducts() {
-		var tallestPro = 0;
-		$(".products td img").each(function() {
-			var thisHeight = $(this).height();
-			
-			if(thisHeight > tallestPro) {
-				tallestPro = thisHeight;
-			}
-		});
-		
-		$(".products td .vertical-center").height(tallestPro);
-
-	}
-
-	function equalHeightCat() {
-		var tallestCat = 0;
-		$(".categories td img").each(function() {
-			var thisHeight = $(this).height();
-			if(thisHeight > tallestCat) {
-				tallestCat = thisHeight;
-			}
-		});
-		$(".categories td span").height(tallestCat);	
-	}
-});
-
