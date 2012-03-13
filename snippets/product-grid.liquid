@@ -1,5 +1,6 @@
+
 <table class="products">
-	{% tablerow product in collections[settings.frontpage_collection].products cols:4  %}
+	{% tablerow product in collections[product-grid].products cols:4  %}
 	<div class="product">
 	<a href="{{ product.url | within: collections.[settings.frontpage_collection] }}">
 

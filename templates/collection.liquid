@@ -40,7 +40,7 @@
 
 {% endunless %}
 
-{% include 'product-grid' %}
+{% include 'product-grid' with collection.handle %}
 
 {% if paginate.pages > 1 %}
 <div id="paginate">

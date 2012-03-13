@@ -17,7 +17,7 @@ function remove_item(id) {
 {% if cart.item_count == 0 %}
 <p><strong>Your shopping basket is empty.</strong> Perhaps a featured item below is of interest...</p>
 
-{% include 'product-grid' %}
+{% include 'product-grid' with 'frontpage' %}
 
 {% else %}
 

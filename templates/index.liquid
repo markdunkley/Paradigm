@@ -89,11 +89,10 @@
 
 
 <div id="content" class="clearfix"> 
-
+ 
 	{% if collections[settings.frontpage_collection].handle != empty %}
-	{% include 'product-grid' %}
+	{% include 'product-grid' with 'frontpage' %}
 	{% endif %}
-
 
 	{% if linklists[settings.linklist_category] != empty %}
 	<table class=" categories">
