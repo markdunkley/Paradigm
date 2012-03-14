@@ -13,4 +13,4 @@ img { -ms-interpolation-mode: bicubic; }
 
 #header ul.main-nav li.dropdown>a { padding-right:0px}
 
-table.products .vertical-center { display:block; height:180px; }
+ul.subnav { margin-top: -60px}
