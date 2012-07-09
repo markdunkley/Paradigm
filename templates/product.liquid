@@ -12,7 +12,6 @@
 {% if show_sub_nav == 'yes' %}
 
 <ul class="subnav clearfix">
-
 	<li><a href="{{ collection.url }}">All</a></li>
 
 	{% capture first_active_tag %}{{ product.tags | last}}{% endcapture %}
@@ -115,12 +114,65 @@
 
 		
 		{% if collection.handle != blank %}
-		
+		   
     <div class="related-products">
 
       <div class="extra-border clearfix">
         <h2>Related Products</h2>
       </div><!-- .extra-border -->
+
+      {% assign number_of_related_products_to_show = 3 %}
+      {% assign image_size = 'compact' %}
+      {% assign heading = 'Other fine products' %}
+
+      {% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
+
+      {% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+      {% assign found_a_collection = false %}
+      {% for c in product.collections %}
+      {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% if collection %}
+      <h3>{{ heading }}</h3>
+      <ul class="related-products">
+        {% assign current_product_found = false %}
+        {% for prod in collection.products limit: number_of_related_products_to_fetch %}
+        {% if prod.title == product.title %}
+        {% assign current_product_found = true %}
+        {% else %}
+        {% unless current_product_found == false and forloop.last %}
+        <li>
+          <div class="image">
+            <a href="{{ prod.url | within: collection }}" title="{{ prod.title | escape }}">
+              {{ prod.featured_image | product_img_url: image_size | img_tag }}
+            </a>
+          </div>
+          <h4><a href="{{ prod.url }}" title="{{ prod.title | escape }}">{{ prod.title }}</a></h4>
+          <span class="money">{{ prod.price | money }}</span>
+        </li>
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       <table class="products five">
