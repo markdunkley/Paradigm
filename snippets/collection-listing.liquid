@@ -1,0 +1,23 @@
+<h2>Product Collections</h2>
+<table class="products">
+  {% tablerow collection in collections cols:4 %}
+  <div class="product">
+
+    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+
+      <a href="{{ collection.url }}" title="Browse our {{ collection_title }} collection">
+
+        <span class="vertical-center">
+          {% if collection.image %}
+          {{ collection.image.src | collection_img_url: 'medium' | img_tag: collection_title }}{% else %}
+          {{ collection.products.first.featured_image | product_img_url: 'medium' | img_tag: collection_title }}{% endif %}
+        </span>
+        <span class="product-description clearfix">
+          <strong class="center-text">{{ collection.title }}</strong>
+        </span>
+      </a>
+
+  </div>
+  {% endtablerow %}
+
+</table>
