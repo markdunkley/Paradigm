@@ -122,8 +122,7 @@
       </div><!-- .extra-border -->
 
       {% assign number_of_related_products_to_show = 3 %}
-      {% assign image_size = 'compact' %}
-      {% assign heading = 'Other fine products' %}
+      {% assign image_size = 'medium' %}
 
       {% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
 
@@ -138,92 +137,38 @@
       {% endif %}
 
       {% if collection %}
-      <h3>{{ heading }}</h3>
-      <ul class="related-products">
+
+      <table class="products">
         {% assign current_product_found = false %}
-        {% for prod in collection.products limit: number_of_related_products_to_fetch %}
+        {% tablerow prod in collection.products limit: number_of_related_products_to_fetch %}
         {% if prod.title == product.title %}
         {% assign current_product_found = true %}
         {% else %}
         {% unless current_product_found == false and forloop.last %}
-        <li>
-          <div class="image">
+
+        <div class="product">
+ 
             <a href="{{ prod.url | within: collection }}" title="{{ prod.title | escape }}">
-              {{ prod.featured_image | product_img_url: image_size | img_tag }}
+              
+              <span class="vertical-center">
+                {{ prod.featured_image | product_img_url: image_size | img_tag }}
+              </span>
+
+              <span class="product-description clearfix">
+                {% if prod.compare_at_price_max > prod.price %}<em>sale</em>{% endif %}<strong>{{ prod.title }}</strong>
+              </span>
             </a>
-          </div>
-          <h4><a href="{{ prod.url }}" title="{{ prod.title | escape }}">{{ prod.title }}</a></h4>
+
+
           <span class="money">{{ prod.price | money }}</span>
-        </li>
+        </div><!-- product -->
+
         {% endunless %}
         {% endif %}
-        {% endfor %}
-      </ul>
+        {% endtablerow %}
+      </table>
       {% endif %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <table class="products five">
-
-        {% capture current_product %}{{product.handle}}{% endcapture %}
-
-        <tr>
-          {% for product in collection.products limit:5%}
-          {% if product.handle == current_product %}
-          {% for product in collection.products limit:6 %}
-          {% unless product.handle == current_product %}
-          {% if forloop.last and forloop.length > 4 %}
-          <td>
-            <div class="product">
-            <a href="{{ product.url | within: collection }}">
-              <span class="vertical-center">
-                <img src="{{ product.images.first | product_img_url: 'compact' }}" alt="{{ product.title | escape }}" />
-              </span>
-
-              <span class="product-description clearfix">
-
-              {% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
-            </span>
-                </div>
-          </td>
-          {% endif %}
-          {% endunless %}
-          {% endfor %}
-          {% else %}
-
-          <td>
-            <div class="product">
-            <a href="{{ product.url | within: collection }}">
-              <span class="vertical-center">
-                <img src="{{ product.images.first | product_img_url: 'compact' }}" alt="{{ product.title | escape }}" />
-              </span>
-
-              <span class="product-description clearfix">
-
-              {% if product.compare_at_price_max > product.price %}<em>sale</em>{% endif %}<strong>{{ product.title }}</strong><small>{{ product.price  | money }}</small></a>
-            </span>
-                </div>
-          </td>
-
-          {% endif %}
-          {% endfor %}
-
-
-
-        </tr>
-      </table>
     </div><!-- .related-products -->
 	
 			{% endif %}
