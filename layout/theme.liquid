@@ -172,16 +172,15 @@
 
 			</div><!-- #header -->
 
-
 			<div class="content clearfix">
-
+				{% if template == 'list-collections' %}
+				{% include 'collection-listing' %}
+				{% else %}
 				{{ content_for_layout }}
-
+				{% endif %}
 			</div><!-- .content -->
 
 		</div><!-- #cont --> 
-
-
 
 		<div id="footer" class="clearfix">
 			<div class="footer-wrapper">
