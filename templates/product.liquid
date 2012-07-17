@@ -112,68 +112,57 @@
 
 </div><!-- .product -->
 
-		
-		{% if collection.handle != blank %}
-		   
-    <div class="related-products">
 
-      <div class="extra-border clearfix">
-        <h2>Related Products</h2>
-      </div><!-- .extra-border -->
+		<!-- Solution brought to you by Caroline Schnapp -->
+    <!-- See this: http://wiki.shopify.com/Related_Products -->
 
-      {% assign number_of_related_products_to_show = 3 %}
-      {% assign image_size = 'medium' %}
+    {% assign number_of_related_products_to_show = 4 %}
+    {% assign image_size = 'medium' %}
+    {% assign heading = 'Other fine products' %}
 
-      {% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
+    {% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
 
-      {% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
-      {% assign found_a_collection = false %}
-      {% for c in product.collections %}
+    {% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+    {% assign found_a_collection = false %}
+    {% for c in product.collections %}
       {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
-      {% assign found_a_collection = true %}
-      {% assign collection = c %}
+        {% assign found_a_collection = true %}
+        {% assign collection = c %}
       {% endif %}
-      {% endfor %}
-      {% endif %}
+    {% endfor %}
+    {% endif %}
 
-      {% if collection %}
+    {% if collection and collection.products_count > 1 %}
+    <div class="related-products">
+    <div class="extra-border clearfix">
+      <h2>Related Products</h2>
+    </div><!-- .extra-border -->
+    <table class="products">
+      {% assign current_product_found = false %}
+      {% tablerow prod in collection.products limit: number_of_related_products_to_fetch %}
+      {% if prod.title == product.title %}
+      {% assign current_product_found = true %}
+      {% else %}
+      {% unless current_product_found == false and forloop.last %}
+      <div class="product">
+       <a href="{{ prod.url | within: collection }}" title="{{ prod.title | escape }}">
+         <span class="vertical-center">
+           {{ prod.featured_image | product_img_url: image_size | img_tag }}
+         </span>
 
-      <table class="products">
-        {% assign current_product_found = false %}
-        {% tablerow prod in collection.products limit: number_of_related_products_to_fetch %}
-        {% if prod.title == product.title %}
-        {% assign current_product_found = true %}
-        {% else %}
-        {% unless current_product_found == false and forloop.last %}
+         <span class="product-description clearfix">
+           {% if prod.compare_at_price_max > prod.price %}<em>sale</em>{% endif %}<strong>{{ prod.title }}</strong>
+         </span>
+       </a>
+       <span class="money">{{ prod.price | money }}</span>
+     </div><!-- product -->
+     {% endunless %}
+     {% endif %}
+     {% endtablerow %}
+   </table>
+   </div><!-- .related-products -->
+   {% endif %}
 
-        <div class="product">
- 
-            <a href="{{ prod.url | within: collection }}" title="{{ prod.title | escape }}">
-              
-              <span class="vertical-center">
-                {{ prod.featured_image | product_img_url: image_size | img_tag }}
-              </span>
-
-              <span class="product-description clearfix">
-                {% if prod.compare_at_price_max > prod.price %}<em>sale</em>{% endif %}<strong>{{ prod.title }}</strong>
-              </span>
-            </a>
-
-
-          <span class="money">{{ prod.price | money }}</span>
-        </div><!-- product -->
-
-        {% endunless %}
-        {% endif %}
-        {% endtablerow %}
-      </table>
-      {% endif %}
-
-    </div><!-- .related-products -->
-	
-			{% endif %}
-	
-	
 	
 	    {%if product.available %}
       <script>
